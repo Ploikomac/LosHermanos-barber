@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Hermanos Barber | L'élégance à Marrakech</title>
+    <meta name="description" content="Salon de coiffure homme premium à Marrakech. Coupes, Barbe, Soins visage. Ambiance moderne et lounge.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0a0a0a',
+                            gray: '#1a1a1a',
+                            silver: '#e2e2e2',
+                            accent: '#ffffff', 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hex-pattern': "url('data:image/svg+xml,%3Csvg width=\\'24\\' height=\\'40\\' viewBox=\\'0 0 24 40\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cpath d=\\'M0 40c5.523 0 10-4.477 10-10V10c0-5.523 4.477-10 10-10H0v40z\\' fill=\\'%23222\\' fill-opacity=\\'0.05\\' fill-rule=\\'evenodd\\'/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Styles personnalisés pour compléter Tailwind */
+        body {
+            background-color: #050505;
+            color: #e2e2e2;
+        }
+        
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .price-card:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Style pour les images de la galerie */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Suppression du filtre grayscale pour afficher en couleur */
+            transition: transform 0.5s ease-in-out;
+        }
+        .gallery-item:hover .gallery-img {
+            /* Effet de zoom uniquement au survol */
+            transform: scale(1.05);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-white transition-all">
+                    <img src="images/logo.png" alt="Los Hermanos Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/black/white?text=LH'">
+                </div>
+                <span class="font-display font-bold text-lg tracking-wider text-white">LOS HERMANOS</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest font-medium text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">Accueil</a>
+                <a href="#salon" class="hover:text-white transition-colors">Le Salon</a>
+                <a href="#galerie" class="hover:text-white transition-colors text-white font-bold">Galerie</a>
+                <a href="#tarifs" class="hover:text-white transition-colors">Tarifs</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+                
+                <a href="https://wa.me/212779742520" target="_blank" class="bg-white text-black px-5 py-2 rounded-full font-bold hover:bg-gray-200 transition-all flex items-center gap-2">
+                    <i class="ph ph-whatsapp-logo text-lg"></i>
+                    <span>Rendez-vous</span>
+                </a>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark border-b border-gray-800 p-6 flex-col gap-4 text-center md:hidden">
+            <a href="#home" class="block py-2 text-gray-300 hover:text-white">Accueil</a>
+            <a href="#salon" class="block py-2 text-gray-300 hover:text-white">Le Salon</a>
+            <a href="#galerie" class="block py-2 text-gray-300 hover:text-white">Galerie</a>
+            <a href="#tarifs" class="block py-2 text-gray-300 hover:text-white">Tarifs</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-white">Contact</a>
+            <a href="https://wa.me/212779742520" class="block py-3 mt-2 bg-white text-black font-bold rounded">Prendre Rendez-vous</a>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/interieur.JPG" alt="Salon Interior" class="w-full h-full object-cover opacity-60" onerror="this.src='https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop'">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                <span class="text-xs uppercase tracking-widest text-gray-300">Ouvert 7j/7 • 10h - 22h</span>
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight text-glow">
+                L'ÉLÉGANCE PURE<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">À MARRAKECH</span>
+            </h1>
+            <p class="font-sans text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">
+                Plus qu'une coupe, une expérience. Plongez dans une atmosphère moderne et exclusive au cœur de la Résidence Al Yousr.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/212779742520" class="w-full md:w-auto px-8 py-4 bg-white text-black font-bold text-lg rounded-sm hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                    <span>Réserver sur WhatsApp</span>
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="#tarifs" class="w-full md:w-auto px-8 py-4 border border-white/30 text-white font-medium text-lg rounded-sm hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    Voir les tarifs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="salon" class="py-24 bg-brand-black relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white">
+                        DESIGN <br>MODERNE & <br><span class="text-gray-500">MINIMALISTE</span>
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        Chez Los Hermanos, nous avons redéfini le barbershop traditionnel. Notre espace se distingue par son éclairage hexagonal signature et son ambiance monochrome apaisante.
+                    </p>
+                    <ul class="space-y-4 mt-4">
+                        <li class="flex items-start gap-3">
+                            <i class="ph ph-armchair text-2xl text-white"></i>
+                            <div>
+                                <h4 class="text-white font-bold">Confort Premium</h4>
+                                <p class="text-sm text-gray-500">Fauteuils ergonomiques pour une relaxation totale.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="ph ph-scissors text-2xl text-white"></i>
+                            <div>
+                                <h4 class="text-white font-bold">Expertise Grooming</h4>
+                                <p class="text-sm text-gray-500">Des barbiers passionnés par le détail et la précision.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative group">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-white to-gray-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                    <img src="images/interieur.JPG" alt="Ambiance Salon" class="relative rounded-lg shadow-2xl w-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie" class="py-24 bg-brand-dark relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+             <div class="text-center mb-16">
+                <span class="text-sm uppercase tracking-[0.3em] text-gray-500">Notre Univers</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2">IMMERSION VISUELLE</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 md:h-[600px]">
+                <div class="gallery-item col-span-2 row-span-2 relative group">
+                    <img src="images/interieur.JPG" alt="Salon view large" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1503951914875-452162b7f304?q=80&w=2070&auto=format&fit=crop'">
+                    <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/80 to-transparent w-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h4 class="text-white font-bold">L'Espace Principal</h4>
+                    </div>
+                </div>
+                
+                <div class="gallery-item col-span-1 h-48 md:h-auto">
+                     <img src="images/image.jpeg" alt="Salon detail" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1976&auto=format&fit=crop'">
+                </div>
+                <div class="gallery-item col-span-1 h-48 md:h-auto">
+                     <img src="images/coupe1.JPG" alt="Barber work" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1634302086887-13b5617bbde2?q=80&w=1974&auto=format&fit=crop'">
+                </div>
+                <div class="gallery-item col-span-1 h-48 md:h-auto">
+                     <img src="images/coupe2.jpeg" alt="Tools detail" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop'">
+                </div>
+                 <div class="gallery-item col-span-1 h-48 md:h-auto">
+                     <img src="images/coupe3.JPG" alt="Atmosphere" class="gallery-img" onerror="this.src='https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=1974&auto=format&fit=crop'">
+                </div>
+            </div>
+             <div class="mt-8 text-center md:hidden">
+                <p class="text-gray-500 text-sm">Scrollez pour voir plus</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tarifs" class="py-24 bg-brand-dark bg-hex-pattern border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-sm uppercase tracking-[0.3em] text-gray-500">Nos Services</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2">MENU & TARIFS</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <div class="price-card bg-brand-gray border border-white/5 p-8 rounded-2xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6 text-white text-2xl">
+                        <i class="ph ph-scissors"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-6">Coupe & Barbe</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Coupe Classique</span>
+                            <span class="font-bold text-white">100 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Coupe + Barbe</span>
+                            <span class="font-bold text-white">130 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Coupe Enfant</span>
+                            <span class="font-bold text-white">70 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Traçage Barbe</span>
+                            <span class="font-bold text-white">50 DH</span>
+                        </li>
+                         <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Rasage à l'ancienne</span>
+                            <span class="font-bold text-white">70 DH</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="price-card bg-zinc-900 border border-white/20 p-8 rounded-2xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-white text-black text-xs font-bold px-3 py-1 uppercase">Best Seller</div>
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 text-black text-2xl">
+                        <i class="ph ph-sparkle"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-6">Soins Visage</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Nettoyage de Peau</span>
+                            <span class="font-bold text-white">150 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Black Mask</span>
+                            <span class="font-bold text-white">50 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Gommage Vapeur</span>
+                            <span class="font-bold text-white">70 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Soin VIP Complet</span>
+                            <span class="font-bold text-white">250 DH</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="price-card bg-brand-gray border border-white/5 p-8 rounded-2xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6 text-white text-2xl">
+                        <i class="ph ph-palette"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-6">Coloration & Soins</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Teinture Barbe</span>
+                            <span class="font-bold text-white">50 DH</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Teinture Cheveux</span>
+                            <span class="font-bold text-white">100 DH+</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Kératine (Lissage)</span>
+                            <span class="font-bold text-white">300 DH+</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-dashed border-gray-700 pb-2">
+                            <span class="text-gray-300">Défrisage</span>
+                            <span class="font-bold text-white">150 DH</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-500 text-sm mb-4">* Les prix peuvent varier selon la longueur et la complexité.</p>
+                <a href="https://wa.me/212779742520" class="inline-flex items-center gap-2 text-white border-b border-white hover:text-gray-300 hover:border-gray-300 transition-all pb-1">
+                    Demander un devis personnalisé <i class="ph ph-arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-black pt-20 pb-10 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="font-display text-3xl font-bold text-white mb-8">NOUS TROUVER</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/10 p-3 rounded-full text-white"><i class="ph ph-map-pin"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Adresse</h4>
+                                <p class="text-gray-400">Résidence Al Yousr, Marrakech, Maroc</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/10 p-3 rounded-full text-white"><i class="ph ph-phone"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Téléphone</h4>
+                                <p class="text-gray-400">07 79 74 25 20</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-white/10 p-3 rounded-full text-white"><i class="ph ph-clock"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Horaires</h4>
+                                <p class="text-gray-400">Ouvert 7j/7<br>10:00 - 22:00</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-8">
+                            <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+                                <i class="ph ph-instagram-logo text-xl"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@los.hermanos.barber.byay?is_from_webapp=1&sender_device=pc" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
+                                <i class="ph ph-tiktok-logo text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-80 w-full rounded-2xl overflow-hidden bg-gray-800 relative">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54336.56193766624!2d-8.062826629994646!3d31.63460287754944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x4250c639686414cf!2sMarrakesh!5e0!3m2!1sen!2sma!4v1700000000000!5m2!1sen!2sma" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-900 mt-16 pt-8 text-center text-gray-600 text-sm">
+                <p>© 2024 Los Hermanos Barber. Tous droits réservés. Design by Expert AI.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        });
+
+        // Fermer le menu au clic d'un lien
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            });
+        });
+    </script>
+</body>
+</html>
